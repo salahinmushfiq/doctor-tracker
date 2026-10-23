@@ -13,7 +13,7 @@ const userSchema = new Schema(
     tokenVersion: { type: Number, default: 0 },
     lastLoginAt: { type: Date },
   },
-  { timestamps: true },
+  { timestamps: true, autoIndex: false, autoCreate: false },
 );
 
 // Login lookup + uniqueness. Case-insensitivity is guaranteed by lowercasing on write and on lookup.

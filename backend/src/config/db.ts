@@ -21,8 +21,15 @@ export async function connectDatabase(uri: string = env.mongoUri): Promise<typeo
     // Fixes the pool for Atlas free tier (shared cluster, 500 connection cap).
     maxIdleTimeMS: 60_000,
   });
-  // Make sure indexes declared on the schemas exist before serving traffic.
-  await Promise.all(mongoose.modelNames().map((name) => mongoose.model(name).init()));
+  // Schemas set autoCreate/autoIndex to false: with bufferCommands=false mongoose's automatic setup would run at import
+  // time, before any connection exists, and fail. So we create collections and indexes explicitly, once connected.
+  await Promise.all(
+    mongoose.modelNames().map(async (name) => {
+      const model = mongoose.model(name);
+      await model.createCollection();
+      await model.createIndexes();
+    }),
+  );
   logger.info('mongodb connected');
   return mongoose;
 }

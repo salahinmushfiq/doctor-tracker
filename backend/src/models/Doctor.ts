@@ -12,7 +12,7 @@ const doctorSchema = new Schema(
     nameSort: { type: String, select: false },
     searchTokens: { type: [String], select: false },
   },
-  { timestamps: true },
+  { timestamps: true, autoIndex: false, autoCreate: false },
 );
 
 doctorSchema.pre('validate', function () {

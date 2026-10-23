@@ -23,7 +23,7 @@ const patientSchema = new Schema(
     nameSort: { type: String, select: false },
     searchTokens: { type: [String], select: false },
   },
-  { timestamps: true },
+  { timestamps: true, autoIndex: false, autoCreate: false },
 );
 
 patientSchema.pre('validate', function () {
