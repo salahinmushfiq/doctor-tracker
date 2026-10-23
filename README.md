@@ -4,8 +4,7 @@ A small full-stack app for managing doctors and their patients, with a database-
 Next.js (App Router) frontend, standalone Express + MongoDB API.
 
 > **Status.** Implemented and checked locally: typecheck, lint, builds, 150 backend unit tests, 52 frontend tests.
-> Run against a real local MongoDB by the repository owner: `seed:admin`, `seed:demo` and `explain` succeeded; 64 of 67 integration tests passed
-> (the 3 failures were fixed afterwards and are awaiting a re-run). **Not yet verified:** real screenshots and an end-to-end browser pass.
+> Run against a real local MongoDB by the repository owner: `seed:admin`, `seed:demo` and `explain` succeeded, and all 67 integration tests pass. **Not yet verified:** real screenshots and an end-to-end browser pass.
 > **Not deployed**; no live URLs exist. See [Verification status](#12-verification-status).
 
 ## 1. Overview
@@ -88,7 +87,7 @@ Free Render instances sleep; the first request can take 30-60 s (the UI shows a 
 |---|---|
 | Backend typecheck, lint, build | verified locally |
 | Backend unit tests (150) | passing locally |
-| Backend integration tests (67) | 64 passed on a local MongoDB; 3 failures fixed (2 test bugs, 1 query-validation gap), **re-run pending** |
+| Backend integration tests (67) | 67/67 passed on a local MongoDB (run by the repository owner) |
 | `seed:admin`, `seed:demo` (24 doctors, 320 patients) | run successfully on a local MongoDB |
 | `npm run explain` | run on that dataset; every listed query uses an index (table below) |
 | Frontend typecheck, lint, production build | verified locally |
