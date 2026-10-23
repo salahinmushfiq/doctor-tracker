@@ -16,6 +16,6 @@ export const dashboardQuery = refineDateRange(
       .transform(Number)
       .pipe(z.number().int().min(1).max(25))
       .default(10),
-  }),
+  }).strict(),
 );
 export type DashboardQuery = z.infer<typeof dashboardQuery>;

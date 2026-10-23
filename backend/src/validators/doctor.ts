@@ -28,7 +28,7 @@ export const doctorListQuery = refineDateRange(
     hospital: z.string().trim().min(1).max(120).optional(),
     sortBy: z.enum(DOCTOR_SORT_FIELDS).default('createdAt'),
     sortOrder: sortOrderParam,
-  }),
+  }).strict(),
 );
 export type DoctorListQuery = z.infer<typeof doctorListQuery>;
 
@@ -51,4 +51,4 @@ export const doctorPatchBody = doctorBody
 /** DELETE /doctors/:id?patients=unassign  (default: refuse when patients are assigned) */
 export const doctorDeleteQuery = z.object({
   patients: z.enum(['unassign']).optional(),
-});
+}).strict();

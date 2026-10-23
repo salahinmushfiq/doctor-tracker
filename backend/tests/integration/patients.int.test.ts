@@ -51,7 +51,7 @@ describe.skipIf(!mongoUri)('patients (integration)', () => {
 
     it('refreshes the search index after a rename', async () => {
       const created = (await s.post('/api/v1/patients', valid)).body.data;
-      await s.patch(`/api/v1/patients/${created.id}`, { fullName: 'Zuberi Mwangi' });
+      await s.patch(`/api/v1/patients/${created.id}`, { fullName: 'Zuberi Mwangi', email: null });
       expect((await s.get('/api/v1/patients?search=zuberi')).body.data).toHaveLength(1);
       expect((await s.get('/api/v1/patients?search=rahim')).body.data).toHaveLength(0);
     });
@@ -129,7 +129,8 @@ describe.skipIf(!mongoUri)('patients (integration)', () => {
       const res = await s.get('/api/v1/patients?sortBy=fullName&sortOrder=asc');
       expect(res.body).toMatchObject({ success: true, pagination: { page: 1, limit: 10, total: 3, totalPages: 1 } });
       expect(res.body.data[0].doctor).toMatchObject({ fullName: 'Dr. Alpha' });
-      expect(res.body.data[2].doctor).toBeNull();
+      expect(res.body.data[1]).toMatchObject({ fullName: 'Aminul Haque', doctor: null }); // unassigned
+      expect(res.body.data[2].doctor).toMatchObject({ fullName: 'Dr. Beta' });
     });
 
     it('searches by name prefix, e-mail and condition', async () => {

@@ -35,13 +35,13 @@ export const patientListQuery = refineDateRange(
     gender: z.enum(GENDERS).optional(),
     /** an ObjectId, or the literal "unassigned" */
     doctorId: z.union([objectIdSchema, z.literal('unassigned')]).optional(),
-  }),
+  }).strict(),
 );
 export type PatientListQuery = z.infer<typeof patientListQuery>;
 
 /** Patients of one doctor: the doctor comes from the route, so no doctor filter. */
 export const doctorPatientsQuery = refineDateRange(
-  z.object({ ...baseListShape, condition: z.enum(CONDITIONS).optional() }),
+  z.object({ ...baseListShape, condition: z.enum(CONDITIONS).optional() }).strict(),
 );
 export type DoctorPatientsQuery = z.infer<typeof doctorPatientsQuery>;
 
