@@ -1,0 +1,15 @@
+{
+  "name": "doctor-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Doctor Tracker monorepo: Express/MongoDB API + Next.js admin dashboard",
+  "scripts": {
+    "install:all": "npm --prefix backend ci && npm --prefix frontend ci",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "lint": "npm --prefix backend run lint && npm --prefix frontend run lint",
+    "typecheck": "npm --prefix backend run typecheck && npm --prefix frontend run typecheck",
+    "test": "npm --prefix backend test && npm --prefix frontend test",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build"
+  }
+}

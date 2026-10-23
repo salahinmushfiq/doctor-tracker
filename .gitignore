@@ -1,0 +1,28 @@
+# local working docs & session memory (intentionally NOT in git)
+docs/
+memory.md
+
+# dependencies / build output
+node_modules/
+dist/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# secrets & env
+.env
+.env.*
+!.env.example
+
+# logs / OS / editor
+*.log
+npm-debug.log*
+.DS_Store
+.vscode/
+.idea/
+
+# test artifacts
+playwright-report/
+test-results/
+.mongodb-binaries/
