@@ -79,7 +79,12 @@ Backend integration tests cover auth, CSRF, authorization, CRUD, filtering, pagi
 3. Create the first admin from your machine with `npm run seed:admin` pointed at Atlas.
 4. Vercel project from `frontend/` with `NEXT_PUBLIC_API_BASE_URL=https://<api-host>/api/v1`; then set `FRONTEND_URL` on Render to the Vercel origin.
 5. Verify: login sets `dt_session` (HttpOnly, Secure, SameSite=None); mutation without CSRF header → 403.
-Caveat: Vercel and Render are different sites, so the cookie is third-party. Safari and some browsers block that; the fallback is to proxy `/api/*` through Next.js rewrites and use `COOKIE_SAMESITE=lax`.
+Cross-site cookies: the frontend host and Render are different sites, so a direct browser-to-API cookie is third-party and is dropped by Safari,
+Brave and some Chrome/Firefox settings (symptom: login succeeds, then you are signed out immediately). **Recommended setup: same-origin proxy.**
+On the frontend host set `API_PROXY_TARGET=https://<api-host>` and `NEXT_PUBLIC_API_BASE_URL=/api/v1` (rebuild), and on Render set
+`COOKIE_SAMESITE=lax`, `COOKIE_SECURE=true`, `FRONTEND_URL=https://<frontend-origin>`. The browser then only talks to its own origin, and Next.js forwards `/api/*` to Render.
+Note: behind two proxies, per-IP rate limits may see the frontend host's address for all users (acceptable for a demo).
+The database name must be present in `MONGODB_URI` (`.../doctor_tracker?...`), otherwise MongoDB uses `test`.
 Free Render instances sleep; the first request can take 30-60 s (the UI shows a waking-up notice).
 
 ## 12. Verification status
