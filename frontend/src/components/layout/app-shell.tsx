@@ -150,7 +150,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <AccountMenu />
           </div>
         </header>
-        <main id="main" tabIndex={-1} className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 outline-none sm:px-6 lg:px-8">
+        <main id="main" tabIndex={-1} className="mx-auto w-full min-w-0 max-w-7xl flex-1 px-4 py-6 outline-none sm:px-6 lg:px-8">
           {children}
         </main>
       </div>

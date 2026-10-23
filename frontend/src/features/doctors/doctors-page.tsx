@@ -46,9 +46,9 @@ export function DoctorsPage() {
     },
     { key: 'spec', header: 'Specialization', sortKey: 'specialization', cell: (d) => <Badge tone="accent">{d.specialization}</Badge> },
     { key: 'hospital', header: 'Hospital', sortKey: 'hospital', cell: (d) => d.hospital },
-    { key: 'phone', header: 'Phone', cell: (d) => <span className="tabular whitespace-nowrap">{d.phone}</span> },
+    { key: 'phone', header: 'Phone', className: 'hidden lg:table-cell', cell: (d) => <span className="tabular whitespace-nowrap">{d.phone}</span> },
     { key: 'patients', header: 'Patients', className: 'text-right', cell: (d) => <span className="tabular">{d.patientCount ?? 0}</span> },
-    { key: 'added', header: 'Added', sortKey: 'createdAt', cell: (d) => <span className="whitespace-nowrap">{formatDate(d.createdAt)}</span> },
+    { key: 'added', header: 'Added', sortKey: 'createdAt', className: 'hidden lg:table-cell', cell: (d) => <span className="whitespace-nowrap">{formatDate(d.createdAt)}</span> },
     {
       key: 'actions',
       header: 'Actions',
